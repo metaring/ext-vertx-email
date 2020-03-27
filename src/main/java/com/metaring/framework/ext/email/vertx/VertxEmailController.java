@@ -19,7 +19,7 @@ import com.metaring.framework.email.EmailMessage;
 import com.metaring.framework.email.EmailMessageSeries;
 import com.metaring.framework.email.EmailTypeEnumerator;
 import com.metaring.framework.exception.ManagedException;
-import com.metaring.framework.ext.vertx.VertxUtilties;
+import com.metaring.framework.ext.vertx.VertxUtilities;
 import com.metaring.framework.functionality.UnmanagedException;
 import com.metaring.framework.type.DataRepresentation;
 import com.metaring.framework.util.StringUtil;
@@ -214,7 +214,7 @@ public class VertxEmailController extends AbstractVerticle implements EmailContr
             });
         }
         else {
-            VertxUtilties.INSTANCE.deployVerticle(VertxEmailController.class.getName(), deploymentOptions, deploy -> {
+            VertxUtilities.INSTANCE.deployVerticle(VertxEmailController.class.getName(), deploymentOptions, deploy -> {
                 LOADED = deploy.succeeded();
                 if (deploy.cause() != null) {
                     deploy.cause().printStackTrace();
@@ -230,7 +230,7 @@ public class VertxEmailController extends AbstractVerticle implements EmailContr
             cache.addAll(emailMessageSeries);
             return;
         }
-        VertxUtilties.INSTANCE.eventBus().send(EVENT_BUS_ADDRESS, emailMessageSeries.toJson());
+        VertxUtilities.INSTANCE.eventBus().send(EVENT_BUS_ADDRESS, emailMessageSeries.toJson());
     }
 
     @Override
